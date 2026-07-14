@@ -47,10 +47,14 @@ app.get('/', (req, res) => {
     });
 });
 
-app.use('/api',reportRouter)
+app.use('/api',reportRouter);
 
 connectdb()
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-})
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
+        });
+    })
+    .catch(() => {
+        process.exit(1);
+    });
